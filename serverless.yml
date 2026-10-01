@@ -9,6 +9,18 @@ provider:
   runtime: nodejs24.x
   architecture: arm64
   memorySize: 128
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:Scan
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt ProductsTable.Arn
 
 build:
   esbuild:

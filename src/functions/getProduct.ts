@@ -3,12 +3,21 @@ import type { APIGatewayProxyEventV2 } from "aws-lambda";
 import { dynamoClient } from "../lib/dynamoClient";
 
 export async function handler(event: APIGatewayProxyEventV2) {
-  const { id } = event.pathParameters;
+  const id = event.pathParameters?.id;
+
+  if (!id) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "Product id is required",
+      }),
+    }
+  }
 
   const command = new GetItemCommand({
     TableName: 'ProductsTable',
     Key: {
-      id,
+      id: { S: id },
     },
   })
 

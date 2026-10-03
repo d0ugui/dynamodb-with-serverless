@@ -1,4 +1,4 @@
-import { GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
 import type { APIGatewayProxyEventV2 } from "aws-lambda";
 import { dynamoClient } from "../lib/dynamoClient";
 
@@ -14,10 +14,10 @@ export async function handler(event: APIGatewayProxyEventV2) {
     }
   }
 
-  const command = new GetItemCommand({
+  const command = new GetCommand({
     TableName: 'ProductsTable',
     Key: {
-      id: { S: id },
+      id,
     },
   })
 

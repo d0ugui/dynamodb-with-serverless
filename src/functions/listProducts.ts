@@ -1,4 +1,4 @@
-import { ScanCommand } from "@aws-sdk/client-dynamodb";
+import { ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { dynamoClient } from "../lib/dynamoClient";
 
 export async function handler() {
